@@ -10,7 +10,12 @@ def falling(n, k):
     >>> falling(4, 0)
     1
     """
-    "*** YOUR CODE HERE ***"
+    # Used recursion to step through factorial.
+    # Technically there is always a "* 1" iteration which is not consistent with above docstring examples...but that doesn't affect multiplication. 
+    if k < 1:
+        return 1
+    else:
+        return n * falling(n - 1, k - 1)
 
 
 def divisible_by_k(n, k):
@@ -33,8 +38,16 @@ def divisible_by_k(n, k):
     >>> c
     0
     """
-    "*** YOUR CODE HERE ***"
+    # Initialize counting variable to track number of test successes.
+    count = 0
 
+    # Iterate from 1 through n to see which numbers are divisible by k (ie - '% = 0')
+    for i in range(1, n + 1):
+        if i % k == 0:
+            print(i)
+            count += 1
+
+    return count
 
 def double_eights(n):
     """Return true if n has two eights in a row.
@@ -51,7 +64,19 @@ def double_eights(n):
     >>> double_eights(80808080)
     False
     """
-    "*** YOUR CODE HERE ***"
+    # Base Case: If n is less than 10 then you've reached the last digit of the number and n // 10 = 0.
+    if n < 10:
+        return False
+    else:
+        # Separate singles digit of n from rest of n.
+        all_but_last, last = n // 10, n % 10
+        
+        # Does the singles digit of n and the singles digit of all_but_last (ie - the ten's digit of n) both equal 8?
+        if last == 8 and all_but_last % 10 == 8:
+            return True
+
+        return double_eights(all_but_last)
+        
 
 
 def digit(n, k):
